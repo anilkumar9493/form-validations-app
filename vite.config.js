@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 2008,
+    port: 2009,
     open: true,
   },
   base: '/form-validations-app/'
