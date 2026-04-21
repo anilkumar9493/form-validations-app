@@ -15,6 +15,22 @@ const App = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
+  const [touched, setTouched] = useState({})
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target
+
+    setTouched((prev) => ({
+      ...prev,
+      [name]: value
+    }))
+    setErrors((prev) => ({
+      ...prev,
+      [name]: validateField(name, value, formData)
+
+    }))
+  }
+
   const validateField = (name, value, currentFormData) => {
     switch (name) {
       case 'name':
@@ -99,6 +115,13 @@ const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
+    const allTouched = Object.keys(formData).reduce((acc, key) => {
+      acc[key] = true
+      return acc
+    }, {})
+
+    setTouched(allTouched)
+
     const validationErrors = validateForm()
 
     if (Object.keys(validationErrors).length > 0) {
@@ -133,8 +156,9 @@ const App = () => {
               value={formData.name}
               onChange={handleChange}
               placeholder="Enter your full name"
+              onBlur={handleBlur}
             />
-            {errors.name && <p className="error">{errors.name}</p>}
+            {errors.name && touched.name && <p className="error">{errors.name}</p>}
           </div>
 
           <div className="form-group">
@@ -146,8 +170,9 @@ const App = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter your email"
+              onBlur={handleBlur}
             />
-            {errors.email && <p className="error">{errors.email}</p>}
+            {errors.email && touched.email && <p className="error">{errors.email}</p>}
           </div>
 
           <div className="form-group">
@@ -160,6 +185,7 @@ const App = () => {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Enter your password"
+                onBlur={handleBlur}
               />
               <button
                 type="button"
@@ -181,7 +207,7 @@ const App = () => {
                 Password Strength: {passwordStrength}
               </p>
             )}
-            {errors.password && <p className="error">{errors.password}</p>}
+            {errors.password && touched.password && <p className="error">{errors.password}</p>}
           </div>
 
           <div className="form-group">
@@ -194,6 +220,7 @@ const App = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 placeholder="Confirm your password"
+                onBlur={handleBlur}
               />
               <button
                 type="button"
@@ -203,7 +230,7 @@ const App = () => {
                 {showConfirmPassword ? 'Hide' : 'Show'}
               </button>
             </div>
-            {errors.confirmPassword && (
+            {errors.confirmPassword && touched.confirmPassword && (
               <p className="error">{errors.confirmPassword}</p>
             )}
           </div>
