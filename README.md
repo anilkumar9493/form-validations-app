@@ -1,16 +1,87 @@
-# React + Vite
+# React Signup Form
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive React signup form with inline validation, password visibility toggle, and improved error feedback UX.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This project is a frontend signup form built with React. It focuses on clean form handling, better user feedback, and a smoother validation experience.
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Real-time / inline validation
+- Field-level error messages
+- Improved error states with better feedback
+- Password show/hide toggle
+- Confirm password validation
+- Responsive UI
+- Cleaner user experience for form interactions
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React
+- JavaScript
+- CSS
+- Git & GitHub
+
+## What I Improved
+
+This project started as a basic signup form and was later improved with better validation and UX enhancements.
+
+### Version History
+
+- `v1-basic-form` - Initial signup form version
+- `v2-enhanced-form` - Improved validation UX, password toggle, and stronger error feedback
+
+## Getting Started
+
+### Clone the repository
+
+```bash
+git clone https://github.com/anilkumar9493/form-validations-app
+cd form-validations-app
+```
+
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Run the project
+
+```bash
+npm start
+```
+
+## Usage
+
+- Enter name, email, password, and confirm password
+- Validation messages appear when fields are invalid
+- Use the password toggle to show or hide password input
+- Submit the form after all fields are valid
+
+## Learning Goals
+
+Through this project, I practiced:
+
+- React form handling
+- State management
+- Conditional rendering
+- Validation logic
+- UX improvements in forms
+- Git versioning with tags
+
+## Future Improvements
+
+- Add success state UI
+- Add stronger password rules
+- Improve accessibility further
+- Connect the form to a backend API
+
+## Author
+
+Your Name
+
+## Repository
+
+GitHub: https://github.com/anilkumar9493/form-validations-app
