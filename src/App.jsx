@@ -157,8 +157,27 @@ const App = () => {
               onChange={handleChange}
               placeholder="Enter your full name"
               onBlur={handleBlur}
+              className={touched.name && errors.name ? 'input-error' : ''}
+              aria-invalid={touched.name && errors.name ? 'true' : 'false'}
+              aria-errormessage={touched.name && errors.name ? 'name-error' : undefined}
             />
-            {errors.name && touched.name && <p className="error">{errors.name}</p>}
+            {touched.name && errors.name && (
+              <p id="name-error" className="error-message" role="alert">
+                <span className="error-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
+                    <circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.15" />
+                    <path
+                      d="M12 7v6"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                    <circle cx="12" cy="16.5" r="1.2" fill="currentColor" />
+                  </svg>
+                </span>
+                <span>{errors.name}</span>
+              </p>
+            )}
           </div>
 
           <div className="form-group">
@@ -171,8 +190,27 @@ const App = () => {
               onChange={handleChange}
               placeholder="Enter your email"
               onBlur={handleBlur}
+              className={touched.email && errors.email ? 'input-error' : ''}
+              aria-invalid={touched.email && errors.email ? 'true' : 'false'}
+              aria-errormessage={touched.email && errors.email ? 'email-error' : undefined}
             />
-            {errors.email && touched.email && <p className="error">{errors.email}</p>}
+            {touched.email && errors.email && (
+              <p id="email-error" className="error-message" role="alert">
+                <span className="error-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
+                    <circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.15" />
+                    <path
+                      d="M12 7v6"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                    <circle cx="12" cy="16.5" r="1.2" fill="currentColor" />
+                  </svg>
+                </span>
+                <span>{errors.email}</span>
+              </p>
+            )}
           </div>
 
           <div className="form-group">
@@ -186,6 +224,9 @@ const App = () => {
                 onChange={handleChange}
                 placeholder="Enter your password"
                 onBlur={handleBlur}
+                className={touched.password && errors.password ? 'input-error' : ''}
+                aria-invalid={touched.password && errors.password ? 'true' : 'false'}
+                aria-errormessage={touched.password && errors.password ? 'password-error' : undefined}
               />
               <button
                 type="button"
@@ -207,7 +248,23 @@ const App = () => {
                 Password Strength: {passwordStrength}
               </p>
             )}
-            {errors.password && touched.password && <p className="error">{errors.password}</p>}
+            {touched.password && errors.password && (
+              <p id="password-error" className="error-message" role="alert">
+                <span className="error-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
+                    <circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.15" />
+                    <path
+                      d="M12 7v6"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                    <circle cx="12" cy="16.5" r="1.2" fill="currentColor" />
+                  </svg>
+                </span>
+                <span>{errors.password}</span>
+              </p>
+            )}
           </div>
 
           <div className="form-group">
@@ -221,6 +278,9 @@ const App = () => {
                 onChange={handleChange}
                 placeholder="Confirm your password"
                 onBlur={handleBlur}
+                className={touched.confirmPassword && errors.confirmPassword ? 'input-error' : ''}
+                aria-invalid={touched.confirmPassword && errors.confirmPassword ? 'true' : 'false'}
+                aria-errormessage={touched.confirmPassword && errors.confirmPassword ? 'confirmPassword-error' : undefined}
               />
               <button
                 type="button"
@@ -230,8 +290,22 @@ const App = () => {
                 {showConfirmPassword ? 'Hide' : 'Show'}
               </button>
             </div>
-            {errors.confirmPassword && touched.confirmPassword && (
-              <p className="error">{errors.confirmPassword}</p>
+            {touched.confirmPassword && errors.confirmPassword && (
+              <p id="confirmPassword-error" className="error-message" role="alert">
+                <span className="error-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
+                    <circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.15" />
+                    <path
+                      d="M12 7v6"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                    <circle cx="12" cy="16.5" r="1.2" fill="currentColor" />
+                  </svg>
+                </span>
+                <span>{errors.confirmPassword}</span>
+              </p>
             )}
           </div>
 

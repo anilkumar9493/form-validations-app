@@ -64,8 +64,9 @@ body {
 
 .error {
   color: #dc2626;
-  font-size: 14px;
+  font-size: 12px;
   margin-top: 6px;
+  font-weight: 500;
 }
 
 .success {
@@ -129,4 +130,80 @@ body {
 
 .strong {
   color: #16a34a;
+}
+
+.input-error {
+  border-color: #dc2626 !important;
+  background: #fef2f2;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.08);
+}
+
+.error-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 8px;
+  color: #dc2626;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  animation: errorFadeSlide 0.22s ease;
+  transform-origin: top left;
+}
+
+.error-icon {
+  width: 18px;
+  height: 18px;
+  color: #dc2626;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+@keyframes errorFadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.input-error.shake {
+  animation: inputShake 0.2s ease;
+}
+
+@keyframes inputShake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-3px);
+  }
+
+  50% {
+    transform: translateX(3px);
+  }
+
+  75% {
+    transform: translateX(-2px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .error-message,
+  .input-error.shake {
+    animation: none;
+  }
 }
