@@ -8,5 +8,5 @@ export default defineConfig({
     port: 2008,
     open: true,
   },
-  base: '/form-validations-app'
+  base: '/form-validations-app/'
 })
