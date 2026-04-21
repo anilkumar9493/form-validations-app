@@ -92,3 +92,41 @@ body {
 .submit-btn:hover {
   background: #1d4ed8;
 }
+
+.password-box {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.toggle-btn {
+  border: none;
+  background: #e2e8f0;
+  color: #1e293b;
+  padding: 12px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.toggle-btn:hover {
+  background: #cbd5e1;
+}
+
+.strength {
+  font-size: 14px;
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+.weak {
+  color: #dc2626;
+}
+
+.medium {
+  color: #d97706;
+}
+
+.strong {
+  color: #16a34a;
+}

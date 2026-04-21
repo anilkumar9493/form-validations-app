@@ -12,40 +12,87 @@ const App = () => {
 
   const [errors, setErrors] = useState({})
   const [successMessage, setSuccessMessage] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
+  const validateField = (name, value, currentFormData) => {
+    switch (name) {
+      case 'name':
+        if (!value.trim()) return 'Name is required'
+        if (value.trim().length < 3) return 'Name must be at least 3 characters'
+        return ''
+
+      case 'email':
+        if (!value.trim()) return 'Email is required'
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          return 'Enter a valid email address'
+        }
+        return ''
+
+      case 'password':
+        if (!value.trim()) return 'Password is required'
+        if (value.length < 6) return 'Password must be at least 6 characters'
+        return ''
+
+      case 'confirmPassword':
+        if (!value.trim()) return 'Confirm Password is required'
+        if (value !== currentFormData.password) return 'Passwords do not match'
+        return ''
+
+      default:
+        return ''
+    }
+  }
+
+  const getPasswordStrength = (password) => {
+    if (!password) return ''
+    if (password.length < 6) return 'Weak'
+    if (
+      password.length >= 6 &&
+      /[A-Z]/.test(password) &&
+      /[0-9]/.test(password) &&
+      /[!@#$%^&*]/.test(password)
+    ) {
+      return 'Strong'
+    }
+    return 'Medium'
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value
-    }))
+
+    const updatedFormData = {
+      ...formData,
+      [name]: value,
+    }
+
+    setFormData(updatedFormData)
     setErrors((prev) => ({
-      [name]: ''
+      ...prev,
+      [name]: validateField(name, value, updatedFormData),
+      ...(name === 'password' && updatedFormData.confirmPassword
+        ? {
+          confirmPassword: validateField(
+            'confirmPassword',
+            updatedFormData.confirmPassword,
+            updatedFormData
+          ),
+        }
+        : {}),
     }))
+
     setSuccessMessage('')
   }
 
   const validateForm = () => {
     const newErrors = {}
 
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required"
-    }
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required"
-    } else if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(formData.email)) {
-      newErrors.email = "Enter a valid email address"
-    }
-    if (!formData.password) {
-      newErrors.password = "Password is required"
-    } else if (formData.password < 6) {
-      newErrors.password = "Password must be at least 6 characters"
-    }
-    if (!formData.confirmPassword) {
-      newErrors.confirmPassword = "Confirm password is required"
-    } else if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match"
-    }
+    Object.keys(formData).forEach((field) => {
+      const error = validateField(field, formData[field], formData)
+      if (error) {
+        newErrors[field] = error
+      }
+    })
     return newErrors
   }
 
@@ -69,7 +116,7 @@ const App = () => {
     }
 
   }
-
+  const passwordStrength = getPasswordStrength(formData.password)
   return (
     <div className="app">
       <div className="form-card">
@@ -105,27 +152,57 @@ const App = () => {
 
           <div className="form-group">
             <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Enter your password"
-            />
+            <div className="password-box">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter your password"
+              />
+              <button
+                type="button"
+                className="toggle-btn"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? 'Hide' : 'Show'}
+              </button>
+            </div>
+            {formData.password && (
+              <p
+                className={`strength ${passwordStrength === 'Weak'
+                  ? 'weak'
+                  : passwordStrength === 'Medium'
+                    ? 'medium'
+                    : 'strong'
+                  }`}
+              >
+                Password Strength: {passwordStrength}
+              </p>
+            )}
             {errors.password && <p className="error">{errors.password}</p>}
           </div>
 
           <div className="form-group">
             <label htmlFor="confirmPassword">Confirm Password</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              placeholder="Confirm your password"
-            />
+            <div className="password-box">
+              <input
+                type={showConfirmPassword ? 'text' : 'password'}
+                id="confirmPassword"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                placeholder="Confirm your password"
+              />
+              <button
+                type="button"
+                className="toggle-btn"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              >
+                {showConfirmPassword ? 'Hide' : 'Show'}
+              </button>
+            </div>
             {errors.confirmPassword && (
               <p className="error">{errors.confirmPassword}</p>
             )}
